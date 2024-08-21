@@ -107,7 +107,7 @@ Let's run the application with **``Cheat Engine``** attached to the process.
 
 ## 1. Finding the Idle Function in Game Memory
 
-Go into ``Memory View``, press  ``CTRL + G`` and input the address ``0046A590`` for **``GameClient::updateIdleKick``** address ``0046A590`` to navigate to the start of the function.
+Go into ``Memory View``, press  ``CTRL + G`` and input the address ``0046A590`` for **``GameClient::updateIdleKick``** address to navigate to the start of the function.
 
 ![P1kTN3](https://github.com/user-attachments/assets/1ba0c4ae-1af6-4f67-9147-94eb6ccb8ef7)
 
