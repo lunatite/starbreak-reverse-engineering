@@ -140,7 +140,7 @@ The **``GameClient``** class pointer address in ``ecx`` is ``1AB05B50``, and if 
 
 Let’s monitor the value as the game runs to verify that we have the correct address. Don’t forget to toggle your breakpoint off!
 
-## 4 Testing
+## 4. Testing
 If we unfocus the game, we can see that the value is increasing, and if we refocus and add keyboard input, the value is reset near 0. 
 
 Let's do another test and set the value to ``899999``. Now, a warning text appears in the chatbox.
