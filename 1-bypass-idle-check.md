@@ -141,10 +141,9 @@ The **``GameClient``** class pointer address in ``ecx`` is ``1AB05B50``, and if 
 Let’s monitor the value as the game runs to verify that we have the correct address. Don’t forget to toggle your breakpoint off!
 
 ## 4. Testing
-If we unfocus the game, we can see that the value is increasing, and if we refocus and add keyboard input, the value is reset near 0. 
+If we unfocus the game, we can see the value increasing, and when we refocus and provide keyboard input, the value resets to nearly zero.
 
-Let's do another test and set the value to ``899999``. Now, a warning text appears in the chatbox.
-
+Let’s perform another test by setting the value to ``899999``. Now, a warning message appears in the chatbox.
 ![image](https://github.com/user-attachments/assets/a039394a-cd25-4434-913f-32ff395024b6)
 
 Awesome! Now we have the memory address where the value is used to check if you have been idling too long. 
