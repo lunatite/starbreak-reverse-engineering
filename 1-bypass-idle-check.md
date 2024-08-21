@@ -126,8 +126,6 @@ To verify this, we can examine the structure of the **``GameClient``** class in 
 
 ## 3. Debugging
 
-Here’s a revised version of the sentence:
-
 Let’s debug the function to find the pointer address to the **``GameClient``** class, allowing us to access the ``sinceKeyPress_`` property. Remember that since the class is dynamically allocated, the pointer address will change each time you open the game.
 
 ![image](https://github.com/user-attachments/assets/1efc25de-96b7-4995-9f7c-126958e3ad0c)
