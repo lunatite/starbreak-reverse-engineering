@@ -33,7 +33,7 @@ The static function address is located at ``0046A590``. Note this address later,
 
 ## 2. Analyzing the Idle Check Function
 
-To make this function easier to understand without examining the assembly code directly, you can use the Hey Rays Decompiler to convert the assembly code into a pseudo-code. Press ``Alt + F5`` to perform the decompilation.
+To make this function easier to understand without examining the assembly code directly, you can use the Hex Rays Decompiler to convert the assembly code into a pseudo-code. Press ``Alt + F5`` to perform the decompilation.
 
 ```c
 void __thiscall GameClient::updateIdleKick(GameClient *const this, int dt)
