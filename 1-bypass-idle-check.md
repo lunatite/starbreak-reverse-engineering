@@ -105,6 +105,7 @@ Based on the logic, if the ``v4`` variable exceeds ``1200000``, the client will 
 In my observation, it appears that ``1200000`` is represented in milliseconds. We can verify this by converting it into minutes.
 
 1,200,000 ms / 1,000 = 1,200 seconds
+
 1,200 seconds / 60 = 20 minutes
 
 This matches the time duration after which the client is kicked from the server.
