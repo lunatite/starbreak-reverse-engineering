@@ -118,7 +118,7 @@ Go into ``Memory View``, press  ``CTRL + G`` and input the address ``0046A590`` 
 Here is the assembly code that initializes the local variables. The previous section shows that the value of ``v4`` is assigned to ``esi``, and ``sinceKeyPress`` is assigned to ``eax`` within the function scope.
 
 
-``ecx`` likely points to the **``GameClient``** class, with ``6C`` offsetting the ``sinceKeyPress_`` property.
+``ecx`` likely is the base address to the **``GameClient``** class, with ``6C`` offsetting the ``sinceKeyPress_`` property.
 
 ![image](https://github.com/user-attachments/assets/778c3332-aabf-435c-999d-c2c742889ab1)
 
@@ -126,13 +126,13 @@ To verify this, we can examine the structure of the **``GameClient``** class in 
 
 ## 3. Debugging
 
-Let’s debug the function to find the pointer address to the **``GameClient``** class, allowing us to access the ``sinceKeyPress_`` property. Remember that since the class is dynamically allocated, the pointer address will change each time you open the game.
+Let’s debug the function to find the base address to the **``GameClient``** class, allowing us to access the ``sinceKeyPress_`` property. Remember that since the class is dynamically allocated, the base address will change each time you open the game.
 
 ![image](https://github.com/user-attachments/assets/1efc25de-96b7-4995-9f7c-126958e3ad0c)
 
 Insert your breakpoint, and the program will stop at that breakpoint. We can see the registers when the breakpoint is hit. 
 
-The **``GameClient``** class pointer address in ``ecx`` is ``1AB05B50``, and if we add the offset ``6C``, we should be able to access the ``sinceKeyPress_`` property ``1AB05BBC``.
+The **``GameClient``** base address in ``ecx`` is ``1AB05B50``, and if we add the offset ``6C``, we should be able to access the ``sinceKeyPress_`` property ``1AB05BBC``.
 
 ![QDu3hH](https://github.com/user-attachments/assets/0c5e3687-d9f1-442f-9afd-19facbd84105)
 
@@ -146,5 +146,24 @@ Let’s perform another test by setting the value to ``899999``. Now, a warning 
 
 Awesome! Now we have the memory address where the value is used to check if you have been idling too long. 
 
+## 5. Bypassing the Idle Check
 
+Like in the previous section, we will re-add the breakpoint and let the game run until it hits it. After the breakpoint is hit, let's step out of the _**idle check function**_ and into the caller function.
 
+![image](https://github.com/user-attachments/assets/cadf5077-ee46-4dfd-845f-aaa772d16e4b)
+
+Next, we will use the idle check function NO-OP (no operation) to prevent it from being called.
+
+![Fzj8VJ](https://github.com/user-attachments/assets/f594cd4e-3a0e-4021-ac57-eda7625a8936)
+
+Now, let's remove the breakpoint to let the game run again. 
+
+Finally, edit the value of ``sinceKeyPress_`` to over ``1200000``, and let's see if we get disconnected.
+
+Voila! You should now stay connected without being disconnected for idling too long.
+
+# Final Observations
+
+It's important to note that the idle check function can be implemented differently across games. Some games may run the idle check only on the client side, others on the server side, and in some cases, both. When the check is active on both the client and server, bypassing it on the client side alone won't be effective, as the server will still monitor your activity and disconnect you after a certain period of inactivity.
+
+In this particular case, after letting it run for over 20 minutes, I observed that I was not disconnected. This suggests that the idle check occurs only on the client side, allowing me to remain connected indefinitely until the server itself is stopped.
