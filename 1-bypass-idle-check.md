@@ -168,7 +168,7 @@ Next, we will use the idle check function NO-OP (no operation) to prevent it fro
 
 Now, let's remove the breakpoint to let the game run again. 
 
-Finally, edit the value of ``sinceKeyPress_`` to over ``1200000``, and let's see if we get disconnected.
+Finally, edit the value of ``sinceKeyPress_`` in **Cheat Engine** to over ``1200000``, and let's see if we get disconnected.
 
 Voila! You should now stay connected without being disconnected for idling too long.
 
