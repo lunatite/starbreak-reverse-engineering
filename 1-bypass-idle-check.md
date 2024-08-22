@@ -126,14 +126,13 @@ Go into ``Memory View``, press  ``CTRL + G`` and input the address ``0046A590`` 
 
 ![4gv3yl](https://github.com/user-attachments/assets/019bb420-c943-40b0-9df8-66a5b77dd996)
 
-Here is the assembly code that initializes the local variables. The previous section shows that the value of ``v4`` is assigned to ``esi``, and ``sinceKeyPress`` is assigned to ``eax`` within the function scope.
+Here is the assembly code that initializes the local variables. The static analysis shows that the value of ``v4`` is assigned to ``esi``, and ``sinceKeyPress`` is assigned to ``eax`` within the function scope.
 
 
 ``ecx`` likely is the base address to the **``GameClient``** class, with ``6C`` offsetting the ``sinceKeyPress_`` property.
 
-![image](https://github.com/user-attachments/assets/778c3332-aabf-435c-999d-c2c742889ab1)
-
 To verify this, we can examine the structure of the **``GameClient``** class in IDA Pro and confirm that ``6C`` offsets the ``sinceKeyPress_`` property.
+![image](https://github.com/user-attachments/assets/778c3332-aabf-435c-999d-c2c742889ab1)
 
 ## 3. Debugging
 
