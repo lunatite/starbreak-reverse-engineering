@@ -176,4 +176,4 @@ Voila! You should now stay connected without being disconnected for idling too l
 
 It's important to note that the idle check function can be implemented differently across games. Some games may run the idle check only on the client side, others on the server side, and in some cases, both. When the check is active on both the client and server, bypassing it on the client side alone won't be effective, as the server will still monitor your activity and disconnect you after a certain period of inactivity.
 
-In this particular case, after letting it run for over 20 minutes, I observed that I was not disconnected. This suggests that the idle check occurs only on the client side, allowing me to remain connected indefinitely until the server itself is stopped.
+In this case, I haven't been disconnected after letting the game run for over 20 minutes of inactivity. This suggests that the idle check occurs only on the client side, allowing me to remain connected indefinitely until the server stops.
