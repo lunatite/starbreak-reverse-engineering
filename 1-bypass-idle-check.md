@@ -2,7 +2,7 @@
 
 - **Context**: Many online games incorporate an _**idle check function**_ to monitor player activity. This function is designed to detect when a player has been inactive for a certain period, typically by checking if there has been any input from the player, such as mouse movements or keyboard presses. If the player remains inactive for too long, the game may automatically log them out.
 
-In Starbreak, the _**idle check function**_ will disconnect you from the game if you're inactive for over 20 minutes.
+In Starbreak, their _**idle check function**_ will disconnect you from the game if you're inactive for over 20 minutes.
 
 ![image](https://github.com/user-attachments/assets/3e317787-0378-4c5e-87a2-b1e51d81aa19)
 
@@ -17,11 +17,13 @@ Let's examine the binary file to identify and locate the _**idle check function*
 A straightforward way to find this function is by searching for string references in the binary. To do this, try searching for the string displayed in the idle disconnect popup and see if it is referenced in our target function.
 
 ![image](https://github.com/user-attachments/assets/a8b89e2e-fbea-41fb-8f81-8a6f9491e407)
+
 We get the result of a constant string located at that specific address.
 
 Double-click the string at the specified address to view it in IDA View. Press ``Ctrl + X`` to list all cross-references.
 
 ![7GC5UZ](https://github.com/user-attachments/assets/38800ec9-5cf5-4d8c-81b2-8808129b306c)
+
 Among the cross-references, there is only one function that references the string. In this case,  **``GameClient::updateIdleKick``** is the function we are looking for. Click on it to navigate to the function's assembly code. 
 
 The static function address is located at ``0046A590``. Note this address later, as we will use it in the **Dynamic Analysis** section.
@@ -90,15 +92,22 @@ LABEL_3:
 ```
 Let's examine the function. 
 
-First, let's examine the function signature.
+First, consider the function signature.
 
 The first parameter, ``this``, is a pointer to the current instance of the **``GameClient``** class. The second parameter ``dt`` is likely the delta time, representing the time difference since the last update. This suggests that the function is probably called during every game loop iteration.
 
-Next, let’s examine the function logic. 
+Now, let’s analyze the function logic. 
 
 There are two local variables: ``sinceKeyPress``, initialized with the value of ``sinceKeyPress_`` from the **``GameClient``** class, and ``v4``, initialized by adding ``sinceKeyPress`` and ``dt`` together. The value of ``v4`` is assigned to ``esi``. And the value ``sinceKeyPress`` is assigned to ``eax`` in the function scope. 
 
 Based on the logic, if the ``v4`` variable exceeds ``1200000``, the client will close its connection to the server and display the idle disconnection popup. 
+
+In my observation, it appears that ``1200000`` is represented in milliseconds. We can verify this by converting it into minutes.
+
+1,200,000 ms / 1,000 = 1,200 seconds
+1,200 seconds / 60 = 20 minutes
+
+This matches the time duration after which the client is kicked from the server.
 
 # 3. Dynamic Analysis
 
